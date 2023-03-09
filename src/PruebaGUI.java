@@ -5,7 +5,6 @@ import javax.swing.*;
 
 class VentanaInicio extends JFrame implements ActionListener{
 
-	JButton btnConv;
 	JTextField cajaTemp1,cajaTemp2;
 	JComboBox<String> comboTmp1 = new JComboBox<String>();
 	JComboBox<String> comboTmp2 = new JComboBox<String>();
@@ -57,7 +56,26 @@ class VentanaInicio extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		
+		if (e.getSource()==cajaTemp1||e.getSource()==comboTmp1||e.getSource()==comboTmp2) {
+			double cnv=Double.parseDouble(cajaTemp1.getText());
+			if (comboTmp1.getSelectedItem()=="Centigrados" && comboTmp2.getSelectedItem()=="Fahrenheit") {
+				cnv=(cnv*1.8)+32;
+			}else if (comboTmp1.getSelectedItem()=="Centigrados" && comboTmp2.getSelectedItem()=="Rankine") {
+				cnv=(cnv*1.8)+491.67;
+			}else if (comboTmp1.getSelectedItem()=="Fahrenheit" && comboTmp2.getSelectedItem()=="Centigrados") {
+				cnv=(cnv-32)*5/9;	
+			}else if (comboTmp1.getSelectedItem()=="Fahrenheit" && comboTmp2.getSelectedItem()=="Rankine") {
+				cnv=(cnv+459.67);	
+			}else if (comboTmp1.getSelectedItem()=="Rankine" && comboTmp2.getSelectedItem()=="Centigrados") {
+				cnv=(cnv-491.67)*5/9;	
+			}else if (comboTmp1.getSelectedItem()=="Rankine" && comboTmp2.getSelectedItem()=="Fahrenheit") {
+				cnv=(cnv-459.67);	
+			}
+			cnv = Math.round(cnv * 100.0) / 100.0;
+			cajaTemp2.setText(String.valueOf(cnv));
+			
+		}
 		
 	}
 
